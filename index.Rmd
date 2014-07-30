@@ -150,7 +150,7 @@ plot(sin(seq(0,2*pi,1/50)),type='l')
 - Data: salary_cpi
 
 ```{r,echo=FALSE,results='asis',warning=FALSE}
-load('salary.RData')
+data('salary', package='DSC2014Tutorial')
 print(xtable(salary_cpi),type='html')
 ```
 
@@ -175,7 +175,7 @@ plot(real_wage~year,salary_cpi,type='l')
 ---
 ## Exercise
 ```{r, fig.cap='',fig.width=13.5,echo=FALSE,warning=FALSE}
-load('salary_cpi.RData')
+data("salary", package="DSC2014Tutorial")
 salary_cpi$real_wage=salary_cpi$salary/salary_cpi$cpi*100
 par(cex=1.5,lwd=3)
 plot(real_wage~year,salary_cpi,type='l')
