@@ -4,17 +4,18 @@ subtitle    : Easy Way to Plot
 author      : Ben
 job         : Engineer, GBC
 logo        : Taiwan_R_slidify.png
+license     : by-nc-sa
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : zenburn       # 
-widgets     : []            # {mathjax, quiz, bootstrap}
+widgets     : [quiz, bootstrap]           # {mathjax, quiz, bootstrap}
 mode        : standalone    # {standalone, draft}
 --- .segue .nobackground .dark
 ## 資料整理完了，來畫圖吧~~~
 
 ---
 ## The R Graphics Package
-# Package: graphics
+### Package: graphics
 
 - basic function for graphics
 - Function List
@@ -69,8 +70,8 @@ text(2,108,'y=101:110',pos=4)
 
 --- 
 ## Simple Plots
-# Object Class: data.frame or matrix or vector
-# Data: iris
+### Object Class: data.frame or matrix or vector
+### Data: iris
 ```{r, echo=FALSE,results='asis',message=FALSE}
 library(xtable)
 library(xts)
@@ -99,6 +100,37 @@ title('Formula',col.main='gray50',cex.main=2)
 mtext('plot(Petal.Width~Petal.Length,data=iris)',3,cex=1.8)
 text(1,2,'plot(y ~ x,data)',cex=1.5,pos=4)
 ```
+
+--- &twocol
+## Exercise
+### 練習Formula
+*** =left
+- data: mtcras
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
+cars
+```
+
+*** =right
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
+par(mar=c(5,5,4,2))
+plot(dist~speed,cars,main='mtcars',cex.lab=2,cex.main=2)
+```
+--- &radio
+## Exercise
+### 練習Formula
+1. plot(speed~dist,cars)
+2. _plot(dist~speed,cars)_
+3. plot(~dist+speed,cars)
+
+*** .hint
+plot(y~x,data)
+
+*** .explanation
+- plot(dist~speed,mtcars)
+- speed for x axis
+- dist for y axis
+- data: cars
+
 ---
 ## Simple Plots
 
@@ -140,7 +172,7 @@ plot(sin(seq(0,2*pi,1/50)),type='l')
 - 消費者物價指數：<a href='http://www.dgbas.gov.tw/ct.asp?xItem=35375&CtNode=2850&mp=1'>主計總處統計專區</a>
 
 -
-    load('salary.RData')
+    data('salary', package='DSC2014Tutorial')
   -   salary_cpi
   -   salary_2013
   -   salary_detail
@@ -156,7 +188,7 @@ print(xtable(salary_cpi),type='html')
 
 ---
 ## Exercise
-# 平均月薪
+### 平均月薪
     plot(salary_cpi[,1:2],type='l')
 ```{r, fig.cap='',fig.width=13.5,echo=FALSE,fig.height=6.5}
 par(cex=1.5,lwd=3)
@@ -164,18 +196,18 @@ plot(salary_cpi[,1:2],type='l')
 ```
 ---
 ## Exercise
-# 實質薪資
+### 實質薪資
     salary_cpi$real_wage=salary_cpi$salary/salary_cpi$cpi*100
     plot(real_wage~year,salary_cpi,type='l')
 ```{r, fig.cap='',fig.width=13.5,echo=FALSE,fig.height=6.5}
-par(cex=1.5,lwd=3)
+par(cex=1.5,lwd=3,mar=c(6,4,3,2))
 salary_cpi$real_wage=salary_cpi$salary/salary_cpi$cpi*100
 plot(real_wage~year,salary_cpi,type='l')
 ```    
 ---
 ## Exercise
 ```{r, fig.cap='',fig.width=13.5,echo=FALSE,warning=FALSE}
-data("salary", package="DSC2014Tutorial")
+
 salary_cpi$real_wage=salary_cpi$salary/salary_cpi$cpi*100
 par(cex=1.5,lwd=3)
 plot(real_wage~year,salary_cpi,type='l')
@@ -185,21 +217,23 @@ text(88,40000,paste('88年:',round(salary_cpi[20,4])),pos=2)
 text(102,40000,paste('102年:',round(salary_cpi[34,4])),pos=2)
 ```   
 
----
+--- &twocol
 ## Simple Plots-Bar plot
-
-
-# 觀察趨勢
-# 比較不同類別的差異
-# 適用於數量較小的資料
 
     x=sample(1:150,50) #從1~150中隨機挑選50個數字
     plot(iris[x,5])
-```{r ,fig.align='center', fig.height=6,fig.cap="",message=FALSE,warning=FALSE,echo=FALSE}
+
+*** =left
+
+- <font size=6><b>觀察趨勢</b></font>
+- <font size=6><b>比較不同類別的差異</b></font>
+- <font size=6><b>適用於數量較小的資料</b></font>
+
+*** =right
+```{r ,fig.align='center', fig.height=7,fig.cap="",message=FALSE,warning=FALSE,echo=FALSE}
 x=sample(1:150,50) 
 plot(iris[x,5],cex.name=2,cex.axis=2)
 ```
-
 
 --- &twocol
 
@@ -218,7 +252,7 @@ barplot(y,horiz=TRUE,cex.name=1.5,cex.axis=1.5,las=1)
 
 
 *** =right
-# 只接受vector or matrix
+### 只接受vector or matrix
     barplot(y)
 ```{r fig.width=7, fig.height=7,fig.cap="",message=FALSE,warning=FALSE,echo=FALSE}
 barplot(y,cex.name=2,cex.axis=2)
@@ -303,7 +337,7 @@ pie(y)
 
 ---
 ## Exercise
-# 最高薪資與最低薪資
+### 最高薪資與最低薪資
 <img src='salary_news.png' width=99%></img>
 
 
@@ -381,13 +415,11 @@ hist(iris[,1],breaks=4)
 
 
 --- &twocol
-## Add Something to a Plot
-# 低階繪圖
-# 加上點、線、面、座標軸、文字說明
-# 需要先有圖，才能畫出，無法獨立執行
-
+## Add Something to a Plot- 低階繪圖
+ 
+1. <font size=5><b> 加上點、線、面、座標軸、文字說明</b></font>
+2. <font size=5><b> 需要先有圖，才能畫出，無法獨立執行</b></font>
 *** =left
-
 - <font size=5><b>點</b></font>
   - points
   
@@ -412,9 +444,8 @@ hist(iris[,1],breaks=4)
 
   - axis
 
-
 ---
-## Add Lines
+## Add Points & Lines
 
 ```{r ,fig.width=13.5,fig.cap="",message=FALSE,warning=FALSE,echo=FALSE}
 plot(iris[,3:4])
@@ -455,10 +486,26 @@ text(-1.65,1,cex=2,'0')
 
 ```
 
-
 ---
 ## Exercise
 # 凸顯實質薪資成長率的沉淪
+```{r,echo=FALSE,fig.cap="",warning=FALSE,fig.width=13.5,fig.height=6.5}
+par(cex=1.5,mar=c(6,4,3,2))
+real_wage=matrix(salary_cpi$real_wage,ncol=34)
+colnames(real_wage)=salary_cpi[,1]
+mp=barplot(real_wage,ylim=c(-20000,60000),col='dodgerblue4',ylab='TWD',xlab='year')
+ratio=diff(salary_cpi$real_wage)/salary_cpi$real_wage[1:33]
+lines(mp[2:34],ratio*500000,typ='o',pch=20,lwd=3,col=2)
+axis(4,seq(-20000,60000,10000),labels=paste(seq(-4,12,2),'%',sep = ""),col=2)
+legend("bottomleft",c('實質薪資','實質薪資成長率'),bty='n',
+       text.col=c('dodgerblue4','red'),
+       col=c('dodgerblue4','red'),pch=c(15,20),cex=1.2)
+mtext(side=3,'成長率',adj=1,cex=1.5)
+``` 
+
+---
+## Exercise
+
     real_wage=matrix(salary_cpi$real_wage,ncol=34)
     colnames(real_wage)=salary_cpi[,1]
     mp=barplot(real_wage,ylim=c(-20000,60000),col='dodgerblue4',ylab='TWD',xlab='year')
@@ -471,7 +518,7 @@ mp=barplot(real_wage,ylim=c(-20000,60000),col='dodgerblue4',ylab='TWD',xlab='yea
 
 ---
 ## Exercise
-# 凸顯實質薪資成長率的沉淪
+
     ratio=diff(salary_cpi$real_wage)/salary_cpi$real_wage[1:33] #實質薪資成長率
     lines(mp[2:34],ratio*500000,typ='o',pch=20,lwd=3,col=2) 
     #畫上實質薪資成長率，為配合原圖的scale，乘上500000
@@ -487,7 +534,7 @@ lines(mp[2:34],ratio*500000,typ='o',pch=20,lwd=3,col=2)
 
 ---
 ## Exercise
-# 凸顯實質薪資成長率的沉淪
+
     
     axis(4,seq(-20000,60000,10000),labels=paste(seq(-4,12,2),'%',sep = ""),col=2)
     # 加上右邊Y軸，須考慮比例
@@ -503,7 +550,7 @@ axis(4,seq(-20000,60000,10000),labels=paste(seq(-4,12,2),'%',sep = ""),col=2)
 
 ---
 ## Exercise
-# 凸顯實質薪資成長率的沉淪
+
     legend("bottomleft",c('實質薪資','實質薪資成長率'),bty='n',
        text.col=c('dodgerblue4','red'),
        col=c('dodgerblue4','red'),pch=c(15,20))# 加上圖例說明
@@ -521,7 +568,7 @@ legend("bottomleft",c('實質薪資','實質薪資成長率'),bty='n',
 ```    
 ---
 ## Exercise
-# 凸顯實質薪資成長率的沉淪
+
     mtext(side=3,'成長率',adj=1) # 在plot的周邊加上說明
 ```{r,echo=FALSE,fig.cap="",warning=FALSE,fig.width=13.5,fig.height=6.5}
 par(cex=1.5,mar=c(6,4,3,2))
@@ -558,7 +605,7 @@ mtext(side=3,'成長率',adj=1,cex=1.5)
 x=seq(-pi,pi,pi/1000)
 y=sin(x)/abs(x)
 plot(x,y)
-text(0,0,expression(over(cos(x)%.%sin(x),abs(x))))
+text(0,0,expression(over(cos(x)%.%sin(x),abs(x))),cex=2)
 
 ```
 *** =right
@@ -686,7 +733,7 @@ text(0,-0.8,expression((3*abs(x)+over(3,4)*sqrt(over(abs((abs(x)-over(3,4))*(abs
 
 ---
 ## Graphical Elements
-# Colors
+### Colors
     colors() #內建的顏色
     rainbow() #產生彩虹色
     palette(rainbow(144)) #將彩虹色設定成預設顏色
@@ -731,7 +778,7 @@ plot(x = df[, 2], y = df[, 1], cex = 0.1, asp = 1,frame.plot = FALSE,axes=FALSE,
 
 ---
 ## Example- Barnsley Fern Fractal
-# 想要讓葉子顏色漸層
+### 想要讓葉子顏色漸層
     a=order(df[,2])
     plot(x = df[a, 2], y = df[a, 1], cex = 0.1, asp = 1,
     col=colorRampPalette(c("darkgreen", "lightgreen"))(10000))
@@ -774,11 +821,6 @@ points(iris[,3:4],pch=20) ## 最後畫上data
     par(mai = c(3, 1, 1, 1))#margin size specified in inches
 <img src='assets/img/mai.png' height=45% width=45%></img>
 
----
-## Figure Margins
-    par(oma = c(3, 1, 1, 1))#the number of lines of margin
-    par(omi = c(3, 1, 1, 1))#margin size specified in inches
-<img src='assets/img/oma.png' height=35% width=35%></img>
 
 ---
 ## Multiple Figure Environment
@@ -798,7 +840,9 @@ for (i in 1:6){
 
 ---
 ## Multiple Figure Environment
-```{r, fig.cap="",fig.height=6}
+    nf=layout(matrix(c(2,1,0,3), 2, 2), widths=c(3,1), heights=c(1,3))
+    layout.show(nf)
+```{r, fig.cap="",fig.height=6,echo=FALSE}
 nf=layout(matrix(c(2,1,0,3), 2, 2), widths=c(3,1), heights=c(1,3))
 par(cex=3)
 layout.show(nf)
@@ -889,7 +933,7 @@ plot(TWD~hours,time_salary,ylim=c(2e4,1.2e5))
 
 ---
 ## Exercise
-# 利用layout，將Scatter plot與Bar plot結合
+### 利用layout，將Scatter plot與Bar plot結合
     layout(matrix(c(1,1,2,3), 2, 2), widths=c(3,6), heights=c(2,2))
     plot(TWD~hours,time_salary,xlim=c(100,260),ylim=c(2e4,1.2e5))
     points(time_salary[ind,],pch=20,col='red')
@@ -935,7 +979,7 @@ wordcloud(words=c(letters,LETTERS,0:9),freq=seq(1,1000,len=62),rot.per=0,fixed.a
 
 <iframe src='http://www.netmarketshare.com/browser-market-share.aspx?qprid=1&qpcustomb=0'></iframe>
 
-# 試著把資料呈現成...
+
 
 ---
 ```{r,fig.cap="",fig.width=13.5,fig.height=8,echo=FALSE,warning=FALSE,message=FALSE}
