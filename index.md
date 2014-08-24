@@ -4,17 +4,18 @@ subtitle    : Easy Way to Plot
 author      : Ben
 job         : Engineer, GBC
 logo        : Taiwan_R_slidify.png
+license     : by-nc-sa
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : zenburn       # 
-widgets     : []            # {mathjax, quiz, bootstrap}
+widgets     : [quiz, bootstrap]           # {mathjax, quiz, bootstrap}
 mode        : standalone    # {standalone, draft}
 --- .segue .nobackground .dark
 ## 資料整理完了，來畫圖吧~~~
 
 ---
 ## The R Graphics Package
-# Package: graphics
+### Package: graphics
 
 - basic function for graphics
 - Function List
@@ -58,10 +59,10 @@ library(help = "graphics")
 
 --- 
 ## Simple Plots
-# Object Class: data.frame or matrix or vector
-# Data: iris
+### Object Class: data.frame or matrix or vector
+### Data: iris
 <!-- html table generated in R 2.15.3 by xtable 1.7-1 package -->
-<!-- Tue Jul 29 15:57:36 2014 -->
+<!-- Sat Aug 23 13:08:23 2014 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> Sepal.Length </TH> <TH> Sepal.Width </TH> <TH> Petal.Length </TH> <TH> Petal.Width </TH> <TH> Species </TH>  </TR>
   <TR> <TD align="right"> 1 </TD> <TD align="right"> 5.10 </TD> <TD align="right"> 3.50 </TD> <TD align="right"> 1.40 </TD> <TD align="right"> 0.20 </TD> <TD> setosa </TD> </TR>
@@ -228,6 +229,87 @@ library(help = "graphics")
 *** =right
 ![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6.png) 
 
+
+--- &twocol
+## Exercise
+### 練習Formula
+*** =left
+- data: mtcras
+
+```
+##    speed dist
+## 1      4    2
+## 2      4   10
+## 3      7    4
+## 4      7   22
+## 5      8   16
+## 6      9   10
+## 7     10   18
+## 8     10   26
+## 9     10   34
+## 10    11   17
+## 11    11   28
+## 12    12   14
+## 13    12   20
+## 14    12   24
+## 15    12   28
+## 16    13   26
+## 17    13   34
+## 18    13   34
+## 19    13   46
+## 20    14   26
+## 21    14   36
+## 22    14   60
+## 23    14   80
+## 24    15   20
+## 25    15   26
+## 26    15   54
+## 27    16   32
+## 28    16   40
+## 29    17   32
+## 30    17   40
+## 31    17   50
+## 32    18   42
+## 33    18   56
+## 34    18   76
+## 35    18   84
+## 36    19   36
+## 37    19   46
+## 38    19   68
+## 39    20   32
+## 40    20   48
+## 41    20   52
+## 42    20   56
+## 43    20   64
+## 44    22   66
+## 45    23   54
+## 46    24   70
+## 47    24   92
+## 48    24   93
+## 49    24  120
+## 50    25   85
+```
+
+
+*** =right
+![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8.png) 
+
+--- &radio
+## Exercise
+### 練習Formula
+1. plot(speed~dist,cars)
+2. _plot(dist~speed,cars)_
+3. plot(~dist+speed,cars)
+
+*** .hint
+plot(y~x,data)
+
+*** .explanation
+- plot(dist~speed,mtcars)
+- speed for x axis
+- dist for y axis
+- data: cars
+
 ---
 ## Simple Plots
 
@@ -251,7 +333,7 @@ library(help = "graphics")
 ## Simple Plots-Line Chart
 
     plot(sin(seq(0,2*pi,1/50)),type='l')
-![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7.png) 
+![plot of chunk unnamed-chunk-9](figure/unnamed-chunk-9.png) 
 
 
 ---
@@ -266,8 +348,8 @@ library(help = "graphics")
 - 每人每月平均薪資：<a href='http://win.dgbas.gov.tw/dgbas04/bc5/EarningAndProductivity/Default.aspx'>薪資及生產力統計資料查詢系統</a>
 - 消費者物價指數：<a href='http://www.dgbas.gov.tw/ct.asp?xItem=35375&CtNode=2850&mp=1'>主計總處統計專區</a>
 
--
-    load('salary.RData')
+- data(salary,package='DSC2014Tutorial')
+
   -   salary_cpi
   -   salary_2013
   -   salary_detail
@@ -277,9 +359,9 @@ library(help = "graphics")
 - Data: salary_cpi
 
 <!-- html table generated in R 2.15.3 by xtable 1.7-1 package -->
-<!-- Tue Jul 29 15:57:37 2014 -->
+<!-- Sat Aug 23 13:08:23 2014 -->
 <TABLE border=1>
-<TR> <TH>  </TH> <TH> year </TH> <TH> salary </TH> <TH> cpi$cpi </TH>  </TR>
+<TR> <TH>  </TH> <TH> year </TH> <TH> salary </TH> <TH> cpi </TH>  </TR>
   <TR> <TD align="right"> 1 </TD> <TD align="right">  69 </TD> <TD align="right"> 8843 </TD> <TD align="right"> 55.61 </TD> </TR>
   <TR> <TD align="right"> 2 </TD> <TD align="right">  70 </TD> <TD align="right"> 10677 </TD> <TD align="right"> 60.67 </TD> </TR>
   <TR> <TD align="right"> 3 </TD> <TD align="right">  71 </TD> <TD align="right"> 11472 </TD> <TD align="right"> 61.83 </TD> </TR>
@@ -319,34 +401,36 @@ library(help = "graphics")
 
 ---
 ## Exercise
-# 平均月薪
+### 平均月薪
     plot(salary_cpi[,1:2],type='l')
-![](figure/unnamed-chunk-9.png) 
-
----
-## Exercise
-# 實質薪資
-    salary_cpi$real_wage=salary_cpi$salary/salary_cpi$cpi*100
-    plot(real_wage~year,salary_cpi,type='l')
-![](figure/unnamed-chunk-10.png) 
-
----
-## Exercise
 ![](figure/unnamed-chunk-11.png) 
 
+---
+## Exercise
+### 實質薪資
+    salary_cpi$real_wage=salary_cpi$salary/salary_cpi$cpi*100
+    plot(real_wage~year,salary_cpi,type='l')
+![](figure/unnamed-chunk-12.png) 
 
 ---
+## Exercise
+![](figure/unnamed-chunk-13.png) 
+
+
+--- &twocol
 ## Simple Plots-Bar plot
-
-
-# 觀察趨勢
-# 比較不同類別的差異
-# 適用於數量較小的資料
 
     x=sample(1:150,50) #從1~150中隨機挑選50個數字
     plot(iris[x,5])
-<img src="figure/unnamed-chunk-12.png" title="" alt="" style="display: block; margin: auto;" />
 
+*** =left
+
+- <font size=6><b>觀察趨勢</b></font>
+- <font size=6><b>比較不同類別的差異</b></font>
+- <font size=6><b>適用於數量較小的資料</b></font>
+
+*** =right
+<img src="figure/unnamed-chunk-14.png" title="" alt="" style="display: block; margin: auto;" />
 
 
 --- &twocol
@@ -361,17 +445,17 @@ library(help = "graphics")
 ```
 ## 
 ##     setosa versicolor  virginica 
-##         19         20         11
+##         19         17         14
 ```
 
-![](figure/unnamed-chunk-13.png) 
+![](figure/unnamed-chunk-15.png) 
 
 
 
 *** =right
-# 只接受vector or matrix
+### 只接受vector or matrix
     barplot(y)
-![](figure/unnamed-chunk-14.png) 
+![](figure/unnamed-chunk-16.png) 
 
 
 
@@ -380,7 +464,7 @@ library(help = "graphics")
 ## Simple Plots-Bar plot
 Data: VADeaths
 <!-- html table generated in R 2.15.3 by xtable 1.7-1 package -->
-<!-- Tue Jul 29 15:57:37 2014 -->
+<!-- Sat Aug 23 13:08:23 2014 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> Rural Male </TH> <TH> Rural Female </TH> <TH> Urban Male </TH> <TH> Urban Female </TH>  </TR>
   <TR> <TD align="right"> 50-54 </TD> <TD align="right"> 11.70 </TD> <TD align="right"> 8.70 </TD> <TD align="right"> 15.40 </TD> <TD align="right"> 8.40 </TD> </TR>
@@ -397,11 +481,10 @@ Data: VADeaths
 ## Simple Plots-Bar plot
 
 *** =left
-
     barplot(VADeaths, beside = TRUE,
          legend=rownames(VADeaths))
 
-![](figure/unnamed-chunk-16.png) 
+![](figure/unnamed-chunk-18.png) 
 
 
 *** =right
@@ -409,7 +492,7 @@ Data: VADeaths
     barplot(VADeaths, 
          legend=rownames(VADeaths))    
 
-![](figure/unnamed-chunk-17.png) 
+![](figure/unnamed-chunk-19.png) 
 
 
 
@@ -428,7 +511,7 @@ Data: VADeaths
 ```
 ## 
 ##     setosa versicolor  virginica 
-##         19         20         11
+##         19         17         14
 ```
 
 
@@ -436,7 +519,7 @@ Data: VADeaths
     
 *** =right
     pie(y)
-![](figure/unnamed-chunk-19.png) 
+![](figure/unnamed-chunk-21.png) 
 
 
 ---
@@ -448,16 +531,16 @@ Data: VADeaths
 -
     library(xts)
     a=order(salary_2013$每人每月薪資)
-    salary_news=matrix(salary_2013$每人每月薪資
-    [c(head(a,3),last(a,3))],ncol = 6)
-    colnames(salary_news)=salary_2013$行業[c(head(a,3),last(a,3))]
+    salary_news=matrix(salary_2013$每人每月薪資[c(head(a,3),tail(a,3))],ncol = 6)
+    colnames(salary_news)=salary_2013$行業[c(head(a,3),tail(a,3))]
+    par(family='STKaiti') #Only for Mac!!!
     mp=barplot(salary_news,col='dodgerblue4') #x軸座標
     text(mp,10000,salary_news,col='gold') #標註薪資
 
 
 ---
 ## Exercise
-# 最高薪資與最低薪資
+### 最高薪資與最低薪資
 <img src='salary_news.png' width=99%></img>
 
 
@@ -469,29 +552,30 @@ Data: VADeaths
 ---
 ## 但是...，有些事情新聞沒說...
 - 若把行業別劃分更細，可以發現更高的薪水...
-- 以"salary_detail"再畫一次
-<img src='salary_detail_modified.png' width=99%></img>
+- 以'salary_detail'再畫一次
+
+<img src='salary_detail_modified.png' width=90%></img>
 
 ---
 ## Simple Plots-Scatter Plot
 
     plot(iris[,3:4])
     plot(Petal.Width~Petal.Length,data=iris)
-![](figure/unnamed-chunk-20.png) 
+![](figure/unnamed-chunk-22.png) 
 
 
 ---
 ## Simple Plots-Scatter Plot
     plot(iris[,1:3])
     plot(~Sepal.Length+Sepal.Width+Petal.Length,data=iris)
-![](figure/unnamed-chunk-21.png) 
+![](figure/unnamed-chunk-23.png) 
 
 
 ---
 ## Simple Plots-Box plot
-    plot(factor,number)
+    plot(factor,number) #Don't Run!
     plot(iris[,5],iris[,1])
-<img src="figure/unnamed-chunk-22.png" title="" alt="" style="display: block; margin: auto;" />
+<img src="figure/unnamed-chunk-24.png" title="" alt="" style="display: block; margin: auto;" />
 
 
 --- &twocol
@@ -503,12 +587,12 @@ Data: VADeaths
     boxplot(iris[,1]~iris[,5])
     boxplot(Sepal.Length~Species,data=iris)
     
-![](figure/unnamed-chunk-23.png) 
+![](figure/unnamed-chunk-25.png) 
 
 
 *** =right
     boxplot(iris[,1:2])
-![](figure/unnamed-chunk-24.png) 
+![](figure/unnamed-chunk-26.png) 
 
 
 ---
@@ -519,7 +603,7 @@ Data: VADeaths
 hist(iris[, 1], breaks = 4)
 ```
 
-<img src="figure/unnamed-chunk-25.png" title="" alt="" style="display: block; margin: auto;" />
+<img src="figure/unnamed-chunk-27.png" title="" alt="" style="display: block; margin: auto;" />
 
 
 
@@ -528,13 +612,11 @@ hist(iris[, 1], breaks = 4)
 
 
 --- &twocol
-## Add Something to a Plot
-# 低階繪圖
-# 加上點、線、面、座標軸、文字說明
-# 需要先有圖，才能畫出，無法獨立執行
-
+## Add Something to a Plot- 低階繪圖
+ 
+1. <font size=5><b> 加上點、線、面、座標軸、文字說明</b></font>
+2. <font size=5><b> 需要先有圖，才能畫出，無法獨立執行</b></font>
 *** =left
-
 - <font size=5><b>點</b></font>
   - points
   
@@ -559,60 +641,64 @@ hist(iris[, 1], breaks = 4)
 
   - axis
 
-
 ---
-## Add Lines
+## Add Points & Lines
 
-![](figure/unnamed-chunk-26.png) 
-
-
----
-## Add Points
-![](figure/unnamed-chunk-27.png) 
-
-
-
----
-## Exercise
-# 凸顯實質薪資成長率的沉淪
-    real_wage=matrix(salary_cpi$real_wage,ncol=34)
-    colnames(real_wage)=salary_cpi[,1]
-    mp=barplot(real_wage,ylim=c(-20000,60000),col='dodgerblue4',ylab='TWD',xlab='year')
 ![](figure/unnamed-chunk-28.png) 
 
 
 ---
-## Exercise
-# 凸顯實質薪資成長率的沉淪
-    ratio=diff(salary_cpi$real_wage)/salary_cpi$real_wage[1:33] #實質薪資成長率
-    lines(mp[2:34],ratio*500000,typ='o',pch=20,lwd=3,col=2) 
-    #畫上實質薪資成長率，為配合原圖的scale，乘上500000
-    
+## Add Points
 ![](figure/unnamed-chunk-29.png) 
 
 
 ---
 ## Exercise
 # 凸顯實質薪資成長率的沉淪
-    
-    axis(4,seq(-20000,60000,10000),labels=paste(seq(-4,12,2),'%',sep = ""),col=2)
-    # 加上右邊Y軸，須考慮比例
 ![](figure/unnamed-chunk-30.png) 
 
 
 ---
 ## Exercise
-# 凸顯實質薪資成長率的沉淪
-    legend("bottomleft",c('實質薪資','實質薪資成長率'),bty='n',
-       text.col=c('dodgerblue4','red'),
-       col=c('dodgerblue4','red'),pch=c(15,20))# 加上圖例說明
+
+    real_wage=matrix(salary_cpi$real_wage,ncol=34)
+    colnames(real_wage)=salary_cpi[,1]
+    mp=barplot(real_wage,ylim=c(-20000,60000),col='dodgerblue4',ylab='TWD',xlab='year')
 ![](figure/unnamed-chunk-31.png) 
+
 
 ---
 ## Exercise
-# 凸顯實質薪資成長率的沉淪
-    mtext(side=3,'成長率',adj=1) # 在plot的周邊加上說明
+
+    ratio=diff(salary_cpi$real_wage)/salary_cpi$real_wage[1:33] #實質薪資成長率
+    lines(mp[2:34],ratio*500000,typ='o',pch=20,lwd=3,col=2) 
+    #畫上實質薪資成長率，為配合原圖的scale，乘上500000
+    
 ![](figure/unnamed-chunk-32.png) 
+
+
+---
+## Exercise
+
+    
+    axis(4,seq(-20000,60000,10000),labels=paste(seq(-4,12,2),'%',sep = ""),col=2)
+    # 加上右邊Y軸，須考慮比例
+![](figure/unnamed-chunk-33.png) 
+
+
+---
+## Exercise
+
+    legend("bottomleft",c('實質薪資','實質薪資成長率'),bty='n',
+       text.col=c('dodgerblue4','red'),
+       col=c('dodgerblue4','red'),pch=c(15,20))# 加上圖例說明
+![](figure/unnamed-chunk-34.png) 
+
+---
+## Exercise
+
+    mtext(side=3,'成長率',adj=1) # 在plot的周邊加上說明
+![](figure/unnamed-chunk-35.png) 
 
 
 ---
@@ -632,7 +718,7 @@ hist(iris[, 1], breaks = 4)
     text(0,0,expression(over(cos(x)%.%
     sin(x),abs(x))))
     
-![](figure/unnamed-chunk-33.png) 
+![](figure/unnamed-chunk-36.png) 
 
 *** =right
 <img src='assets/img/plotmath1.png' width=120% height=120%></img>
@@ -661,7 +747,7 @@ hist(iris[, 1], breaks = 4)
 ## Example- Batman Equation
 - R Blogger 
 <a href='http://www.r-bloggers.com/batman-equationhappy-halloween-plot-the-batman-logo-in/'>http://www.r-bloggers.com/batman-equationhappy-halloween-plot-the-batman-logo-in/</a>
-![](figure/unnamed-chunk-34.png) 
+![](figure/unnamed-chunk-37.png) 
 
 
 ---
@@ -737,35 +823,42 @@ text(0, -0.8, expression((3 * abs(x) + over(3, 4) * sqrt(over(abs((abs(x) -
 
 ---
 ## Graphical Elements
-# Colors
+### Colors
     colors() #內建的顏色
-    rainbow() #產生彩虹色
+    rainbow(144) #產生彩虹色
     palette(rainbow(144)) #將彩虹色設定成預設顏色
     colorRampPalette(c('red','green'))(10) #紅綠漸層 
 
-![plot of chunk unnamed-chunk-37](figure/unnamed-chunk-37.png) 
-
-
----
-## Example- Barnsley Fern Fractal
-
-![plot of chunk unnamed-chunk-38](figure/unnamed-chunk-38.png) 
+![plot of chunk unnamed-chunk-40](figure/unnamed-chunk-40.png) 
 
 
 
 ---
 ## Example- Barnsley Fern Fractal
-# 想要讓葉子顏色漸層
-    a=order(df[,2])
+
+![plot of chunk unnamed-chunk-41](figure/unnamed-chunk-41.png) 
+
+
+
+---
+## Example- Barnsley Fern Fractal
+### 想要讓葉子顏色漸層
+
+```r
+data("df_brower", package = "DSC2014Tutorial")
+a = order(df[, 2])
+```
+
     plot(x = df[a, 2], y = df[a, 1], cex = 0.1, asp = 1,
     col=colorRampPalette(c("darkgreen", "lightgreen"))(10000))
-![](figure/unnamed-chunk-39.png) 
+
+![](figure/unnamed-chunk-43.png) 
 
 
 ---
 ## Example- 偽ggplot
 
-![](figure/unnamed-chunk-40.png) 
+![](figure/unnamed-chunk-44.png) 
 
 
 ---
@@ -791,11 +884,6 @@ points(iris[, 3:4], pch = 20)  ## 最後畫上data
     par(mai = c(3, 1, 1, 1))#margin size specified in inches
 <img src='assets/img/mai.png' height=45% width=45%></img>
 
----
-## Figure Margins
-    par(oma = c(3, 1, 1, 1))#the number of lines of margin
-    par(omi = c(3, 1, 1, 1))#margin size specified in inches
-<img src='assets/img/oma.png' height=35% width=35%></img>
 
 ---
 ## Multiple Figure Environment
@@ -803,20 +891,15 @@ points(iris[, 3:4], pch = 20)  ## 最後畫上data
 
     par(mfrow=c(3,2))
     
-![](figure/unnamed-chunk-42.png) 
+![](figure/unnamed-chunk-46.png) 
 
 
 
 ---
 ## Multiple Figure Environment
-
-```r
-nf = layout(matrix(c(2, 1, 0, 3), 2, 2), widths = c(3, 1), heights = c(1, 3))
-par(cex = 3)
-layout.show(nf)
-```
-
-![](figure/unnamed-chunk-43.png) 
+    nf=layout(matrix(c(2,1,0,3), 2, 2), widths=c(3,1), heights=c(1,3))
+    layout.show(nf)
+![](figure/unnamed-chunk-47.png) 
 
 
 ---
@@ -839,12 +922,12 @@ barplot(yhist$counts, axes = FALSE, space = 0, horiz = TRUE)
 ## Multiple Figure Environment
 *** =left
 <font size=6>調整邊界前</font>
-![](figure/unnamed-chunk-45.png) 
+![](figure/unnamed-chunk-49.png) 
 
 
 *** =right
 <font size=6>調整邊界後</font>
-![](figure/unnamed-chunk-46.png) 
+![](figure/unnamed-chunk-50.png) 
 
 
 
@@ -868,7 +951,7 @@ barplot(yhist$counts, axes = FALSE, space = 0, horiz = TRUE)
 ---
 ## Exercise
     plot(TWD~hours,time_salary)
-![](figure/unnamed-chunk-47.png) 
+![](figure/unnamed-chunk-51.png) 
 
 
 --- 
@@ -888,7 +971,7 @@ barplot(yhist$counts, axes = FALSE, space = 0, horiz = TRUE)
 
 ---
 ## Exercise
-# 利用layout，將Scatter plot與Bar plot結合
+### 利用layout，將Scatter plot與Bar plot結合
     layout(matrix(c(1,1,2,3), 2, 2), widths=c(3,6), heights=c(2,2))
     plot(TWD~hours,time_salary,xlim=c(100,260),ylim=c(2e4,1.2e5))
     points(time_salary[ind,],pch=20,col='red')
@@ -917,7 +1000,7 @@ barplot(yhist$counts, axes = FALSE, space = 0, horiz = TRUE)
 ---
 ## wordcloud
 
-<img src="figure/unnamed-chunk-48.png" title="" alt="" style="display: block; margin: auto;" />
+<img src="figure/unnamed-chunk-52.png" title="" alt="" style="display: block; margin: auto;" />
 
 
     install.packages("wordcloud")
@@ -932,29 +1015,13 @@ barplot(yhist$counts, axes = FALSE, space = 0, horiz = TRUE)
 
 <iframe src='http://www.netmarketshare.com/browser-market-share.aspx?qprid=1&qpcustomb=0'></iframe>
 
-# 試著把資料呈現成...
-
----
-![](figure/unnamed-chunk-49.png) 
 
 
 ---
-## Project
-# 你可能需要...
-    library(XML)
-    library(xts)
-    html='http://www.netmarketshare.com/browser-market-share.aspx?qprid=1&qpcustomb=0'
-    test_doc=htmlParse(html,encoding="big5",replaceEntities=TRUE)
-    test = readHTMLTable(test_doc)
-    browser_table=data.frame(Month=as.POSIXct(c(paste(2013,7:12,1,sep='-'),
-    paste(2014,1:5,1,sep='-')))) #Transform to time series data
-    for (i in 2:7){
-      #transform to numeric data
-      browser_table=cbind(browser_table,
-      as.numeric(gsub('%','',as.character(test$fwReportTable1[,i])))) 
-    }
-    colnames(browser_table)[2:7]=colnames(test$fwReportTable1)[2:7]
-    colnames(browser_table)[2]="IE"
+![](figure/unnamed-chunk-53.png) 
+
+
+
 
 ---
 ## Project
@@ -968,11 +1035,11 @@ barplot(yhist$counts, axes = FALSE, space = 0, horiz = TRUE)
       lines(browser_table[,c(1,i)],type='o',col=i-1,lwd=2,pch=20)
     }
     par(mar=c(0,0,0,0.1),cex=1.2)
-    pie(as.numeric(last(browser_table)[2:7]),col=1:6,labels="")
+    pie(as.numeric(tail(browser_table,1)[2:7]),col=1:6,labels="")
     legend('topleft',legend=colnames(browser_table)[2:7],text.col=1:6,col=1:6,pch=20,bty='n')
     par(mar=c(0,0,0,0),cex=1)
-    wordcloud(colnames(browser_table)[2:7],last(browser_table)[,2:7]*10000,scale=c(6,1),
-    ordered.colors = TRUE,colors =1:6)
+    wordcloud(colnames(browser_table)[2:7],tail(browser_table,1)[,2:7]*10000,scale=c(6,1),
+    ordered.colors = TRUE,colors =1:6) #字不見時，可調整scale
 
 --- .segue .nobackground .dark
 ## Thank you!

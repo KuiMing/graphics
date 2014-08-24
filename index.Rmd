@@ -171,8 +171,8 @@ plot(sin(seq(0,2*pi,1/50)),type='l')
 - 每人每月平均薪資：<a href='http://win.dgbas.gov.tw/dgbas04/bc5/EarningAndProductivity/Default.aspx'>薪資及生產力統計資料查詢系統</a>
 - 消費者物價指數：<a href='http://www.dgbas.gov.tw/ct.asp?xItem=35375&CtNode=2850&mp=1'>主計總處統計專區</a>
 
--
-    data('salary', package='DSC2014Tutorial')
+- data(salary,package='DSC2014Tutorial')
+
   -   salary_cpi
   -   salary_2013
   -   salary_detail
@@ -182,7 +182,7 @@ plot(sin(seq(0,2*pi,1/50)),type='l')
 - Data: salary_cpi
 
 ```{r,echo=FALSE,results='asis',warning=FALSE}
-data('salary', package='DSC2014Tutorial')
+load('salary.RData')
 print(xtable(salary_cpi),type='html')
 ```
 
@@ -273,7 +273,6 @@ print(xtable(VADeaths),type='html')
 ## Simple Plots-Bar plot
 
 *** =left
-
     barplot(VADeaths, beside = TRUE,
          legend=rownames(VADeaths))
 
@@ -328,9 +327,9 @@ pie(y)
 -
     library(xts)
     a=order(salary_2013$每人每月薪資)
-    salary_news=matrix(salary_2013$每人每月薪資
-    [c(head(a,3),last(a,3))],ncol = 6)
-    colnames(salary_news)=salary_2013$行業[c(head(a,3),last(a,3))]
+    salary_news=matrix(salary_2013$每人每月薪資[c(head(a,3),tail(a,3))],ncol = 6)
+    colnames(salary_news)=salary_2013$行業[c(head(a,3),tail(a,3))]
+    par(family='STKaiti') #Only for Mac!!!
     mp=barplot(salary_news,col='dodgerblue4') #x軸座標
     text(mp,10000,salary_news,col='gold') #標註薪資
 
@@ -349,8 +348,9 @@ pie(y)
 ---
 ## 但是...，有些事情新聞沒說...
 - 若把行業別劃分更細，可以發現更高的薪水...
-- 以"salary_detail"再畫一次
-<img src='salary_detail_modified.png' width=99%></img>
+- 以'salary_detail'再畫一次
+
+<img src='salary_detail_modified.png' width=90%></img>
 
 ---
 ## Simple Plots-Scatter Plot
@@ -371,7 +371,7 @@ plot(iris[,1:3])
 
 ---
 ## Simple Plots-Box plot
-    plot(factor,number)
+    plot(factor,number) #Don't Run!
     plot(iris[,5],iris[,1])
 ```{r,fig.align='center', fig.height=7,fig.width=8,fig.cap="",message=FALSE,warning=FALSE,echo=FALSE}
 par(cex=1.5,mar=c(5,4,1,2),bty='l')
@@ -735,14 +735,15 @@ text(0,-0.8,expression((3*abs(x)+over(3,4)*sqrt(over(abs((abs(x)-over(3,4))*(abs
 ## Graphical Elements
 ### Colors
     colors() #內建的顏色
-    rainbow() #產生彩虹色
+    rainbow(144) #產生彩虹色
     palette(rainbow(144)) #將彩虹色設定成預設顏色
     colorRampPalette(c('red','green'))(10) #紅綠漸層 
 
-```{r,echo=FALSE,warning=FALSE,message=FALSE,fig.height=6,fig.width=13.5}
+```{r,echo=FALSE,warning=FALSE,message=FALSE,fig.height=5.5,fig.width=13.5}
 palette(rainbow(144))
 plot(1:144,rep(0,144),pch=20,col=1:144,cex=20,ann=FALSE)
 ```
+
 
 ---
 ## Example- Barnsley Fern Fractal
@@ -779,10 +780,15 @@ plot(x = df[, 2], y = df[, 1], cex = 0.1, asp = 1,frame.plot = FALSE,axes=FALSE,
 ---
 ## Example- Barnsley Fern Fractal
 ### 想要讓葉子顏色漸層
-    a=order(df[,2])
+```{r,eval=FALSE}
+data('df_brower',package='DSC2014Tutorial')
+a=order(df[,2])
+```
     plot(x = df[a, 2], y = df[a, 1], cex = 0.1, asp = 1,
     col=colorRampPalette(c("darkgreen", "lightgreen"))(10000))
+
 ```{r, echo=FALSE,warning=FALSE,message=FALSE,fig.cap=""}
+par(mar=c(7,4,1,2))
 a=order(df[,2])
 plot(x = df[a, 2], y = df[a, 1], cex = 0.1, asp = 1,col=colorRampPalette(c("darkgreen", "lightgreen"))(10000),frame.plot = FALSE,axes=FALSE,ann = FALSE)
 
@@ -989,6 +995,8 @@ html='http://www.netmarketshare.com/browser-market-share.aspx?qprid=1&qpcustomb=
 test_doc=htmlParse(html,encoding="big5",replaceEntities=TRUE)
 test = readHTMLTable(test_doc)
 browser_table=data.frame(Month=as.POSIXct(c(paste(2013,7:12,1,sep='-'),paste(2014,1:5,1,sep='-')))) #Transform to time series data
+
+
 for (i in 2:7){
   browser_table=cbind(browser_table,as.numeric(gsub('%','',as.character(test$fwReportTable1[,i])))) #transform to numeric data
 }
@@ -1005,30 +1013,14 @@ for (i in 3:7){
   lines(browser_table[,c(1,i)],type='o',col=i-1,lwd=2,pch=20)
 }
 par(mar=c(0,0,0,0.1),cex=2)
-pie(as.numeric(last(browser_table)[2:7]),col=1:6,labels="")
+pie(as.numeric(tail(browser_table,1)[2:7]),col=1:6,labels="")
 legend('topleft',legend=colnames(browser_table)[2:7],text.col=1:6,col=1:6,pch=20,bty='n')
 legend('right',bty='n',legend="",title='2014 May')
 par(mar=c(0,0,0,0),cex=1)
-wordcloud(colnames(browser_table)[2:7],last(browser_table)[,2:7]*10000,scale=c(7,1),ordered.colors = TRUE,colors =1:6)
+wordcloud(colnames(browser_table)[2:7],tail(browser_table,1)[,2:7]*10000,scale=c(7,1),ordered.colors = TRUE,colors =1:6)
 ```
 
----
-## Project
-# 你可能需要...
-    library(XML)
-    library(xts)
-    html='http://www.netmarketshare.com/browser-market-share.aspx?qprid=1&qpcustomb=0'
-    test_doc=htmlParse(html,encoding="big5",replaceEntities=TRUE)
-    test = readHTMLTable(test_doc)
-    browser_table=data.frame(Month=as.POSIXct(c(paste(2013,7:12,1,sep='-'),
-    paste(2014,1:5,1,sep='-')))) #Transform to time series data
-    for (i in 2:7){
-      #transform to numeric data
-      browser_table=cbind(browser_table,
-      as.numeric(gsub('%','',as.character(test$fwReportTable1[,i])))) 
-    }
-    colnames(browser_table)[2:7]=colnames(test$fwReportTable1)[2:7]
-    colnames(browser_table)[2]="IE"
+
 
 ---
 ## Project
@@ -1042,11 +1034,11 @@ wordcloud(colnames(browser_table)[2:7],last(browser_table)[,2:7]*10000,scale=c(7
       lines(browser_table[,c(1,i)],type='o',col=i-1,lwd=2,pch=20)
     }
     par(mar=c(0,0,0,0.1),cex=1.2)
-    pie(as.numeric(last(browser_table)[2:7]),col=1:6,labels="")
+    pie(as.numeric(tail(browser_table,1)[2:7]),col=1:6,labels="")
     legend('topleft',legend=colnames(browser_table)[2:7],text.col=1:6,col=1:6,pch=20,bty='n')
     par(mar=c(0,0,0,0),cex=1)
-    wordcloud(colnames(browser_table)[2:7],last(browser_table)[,2:7]*10000,scale=c(6,1),
-    ordered.colors = TRUE,colors =1:6)
+    wordcloud(colnames(browser_table)[2:7],tail(browser_table,1)[,2:7]*10000,scale=c(6,1),
+    ordered.colors = TRUE,colors =1:6) #字不見時，可調整scale
 
 --- .segue .nobackground .dark
 ## Thank you!
