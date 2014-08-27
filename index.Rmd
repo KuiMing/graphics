@@ -1029,16 +1029,18 @@ wordcloud(colnames(browser_table)[2:7],tail(browser_table,1)[,2:7]*10000,scale=c
     palette(plot_color) 
     layout(matrix(c(3,1,2,1), 2, 2), widths=c(2,2), heights=c(2,2))
     par(mar=c(4,4,0,2),cex=1.2)
-    plot(browser_table[,1:2],type='o',lwd=2,ylim=c(0,60),pch=20)
+    plot(browser_table[,1:2],lwd=2,ylim=c(0,60),pch=20,type='o')
     for (i in 3:7){
       lines(browser_table[,c(1,i)],type='o',col=i-1,lwd=2,pch=20)
     }
     par(mar=c(0,0,0,0.1),cex=1.2)
     pie(as.numeric(tail(browser_table,1)[2:7]),col=1:6,labels="")
-    legend('topleft',legend=colnames(browser_table)[2:7],text.col=1:6,col=1:6,pch=20,bty='n')
+    legend('topleft',legend=colnames(browser_table)[2:7],
+      text.col=1:6,col=1:6,pch=20,bty='n')
     par(mar=c(0,0,0,0),cex=1)
     wordcloud(colnames(browser_table)[2:7],tail(browser_table,1)[,2:7]*10000,scale=c(6,1),
-    ordered.colors = TRUE,colors =1:6) #字不見時，可調整scale
+     ordered.colors = TRUE,colors =1:6) #字不見時，可調整scale
+
 
 --- .segue .nobackground .dark
 ## Thank you!

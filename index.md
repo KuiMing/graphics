@@ -62,7 +62,7 @@ library(help = "graphics")
 ### Object Class: data.frame or matrix or vector
 ### Data: iris
 <!-- html table generated in R 2.15.3 by xtable 1.7-1 package -->
-<!-- Sat Aug 23 13:08:23 2014 -->
+<!-- Wed Aug 27 03:00:47 2014 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> Sepal.Length </TH> <TH> Sepal.Width </TH> <TH> Petal.Length </TH> <TH> Petal.Width </TH> <TH> Species </TH>  </TR>
   <TR> <TD align="right"> 1 </TD> <TD align="right"> 5.10 </TD> <TD align="right"> 3.50 </TD> <TD align="right"> 1.40 </TD> <TD align="right"> 0.20 </TD> <TD> setosa </TD> </TR>
@@ -359,7 +359,7 @@ plot(y~x,data)
 - Data: salary_cpi
 
 <!-- html table generated in R 2.15.3 by xtable 1.7-1 package -->
-<!-- Sat Aug 23 13:08:23 2014 -->
+<!-- Wed Aug 27 03:00:47 2014 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> year </TH> <TH> salary </TH> <TH> cpi </TH>  </TR>
   <TR> <TD align="right"> 1 </TD> <TD align="right">  69 </TD> <TD align="right"> 8843 </TD> <TD align="right"> 55.61 </TD> </TR>
@@ -445,7 +445,7 @@ plot(y~x,data)
 ```
 ## 
 ##     setosa versicolor  virginica 
-##         19         17         14
+##         17         15         18
 ```
 
 ![](figure/unnamed-chunk-15.png) 
@@ -464,7 +464,7 @@ plot(y~x,data)
 ## Simple Plots-Bar plot
 Data: VADeaths
 <!-- html table generated in R 2.15.3 by xtable 1.7-1 package -->
-<!-- Sat Aug 23 13:08:23 2014 -->
+<!-- Wed Aug 27 03:00:48 2014 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> Rural Male </TH> <TH> Rural Female </TH> <TH> Urban Male </TH> <TH> Urban Female </TH>  </TR>
   <TR> <TD align="right"> 50-54 </TD> <TD align="right"> 11.70 </TD> <TD align="right"> 8.70 </TD> <TD align="right"> 15.40 </TD> <TD align="right"> 8.40 </TD> </TR>
@@ -511,7 +511,7 @@ Data: VADeaths
 ```
 ## 
 ##     setosa versicolor  virginica 
-##         19         17         14
+##         17         15         18
 ```
 
 
@@ -1030,16 +1030,18 @@ barplot(yhist$counts, axes = FALSE, space = 0, horiz = TRUE)
     palette(plot_color) 
     layout(matrix(c(3,1,2,1), 2, 2), widths=c(2,2), heights=c(2,2))
     par(mar=c(4,4,0,2),cex=1.2)
-    plot(browser_table[,1:2],type='o',lwd=2,ylim=c(0,60),pch=20)
+    plot(browser_table[,1:2],lwd=2,ylim=c(0,60),pch=20,type='o')
     for (i in 3:7){
       lines(browser_table[,c(1,i)],type='o',col=i-1,lwd=2,pch=20)
     }
     par(mar=c(0,0,0,0.1),cex=1.2)
     pie(as.numeric(tail(browser_table,1)[2:7]),col=1:6,labels="")
-    legend('topleft',legend=colnames(browser_table)[2:7],text.col=1:6,col=1:6,pch=20,bty='n')
+    legend('topleft',legend=colnames(browser_table)[2:7],
+      text.col=1:6,col=1:6,pch=20,bty='n')
     par(mar=c(0,0,0,0),cex=1)
     wordcloud(colnames(browser_table)[2:7],tail(browser_table,1)[,2:7]*10000,scale=c(6,1),
-    ordered.colors = TRUE,colors =1:6) #字不見時，可調整scale
+     ordered.colors = TRUE,colors =1:6) #字不見時，可調整scale
+
 
 --- .segue .nobackground .dark
 ## Thank you!
