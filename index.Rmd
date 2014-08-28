@@ -105,7 +105,7 @@ text(1,2,'plot(y ~ x,data)',cex=1.5,pos=4)
 ## Exercise
 ### 練習Formula
 *** =left
-- data: mtcras
+- data: cars
 ```{r,echo=FALSE,warning=FALSE,message=FALSE}
 cars
 ```
@@ -113,7 +113,7 @@ cars
 *** =right
 ```{r,echo=FALSE,warning=FALSE,message=FALSE}
 par(mar=c(5,5,4,2))
-plot(dist~speed,cars,main='mtcars',cex.lab=2,cex.main=2)
+plot(dist~speed,cars,main='cars',cex.lab=2,cex.main=2)
 ```
 --- &radio
 ## Exercise
@@ -126,7 +126,7 @@ plot(dist~speed,cars,main='mtcars',cex.lab=2,cex.main=2)
 plot(y~x,data)
 
 *** .explanation
-- plot(dist~speed,mtcars)
+- plot(dist~speed,cars)
 - speed for x axis
 - dist for y axis
 - data: cars

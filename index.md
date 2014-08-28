@@ -62,7 +62,7 @@ library(help = "graphics")
 ### Object Class: data.frame or matrix or vector
 ### Data: iris
 <!-- html table generated in R 2.15.3 by xtable 1.7-1 package -->
-<!-- Wed Aug 27 03:00:47 2014 -->
+<!-- Thu Aug 28 16:04:13 2014 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> Sepal.Length </TH> <TH> Sepal.Width </TH> <TH> Petal.Length </TH> <TH> Petal.Width </TH> <TH> Species </TH>  </TR>
   <TR> <TD align="right"> 1 </TD> <TD align="right"> 5.10 </TD> <TD align="right"> 3.50 </TD> <TD align="right"> 1.40 </TD> <TD align="right"> 0.20 </TD> <TD> setosa </TD> </TR>
@@ -234,7 +234,7 @@ library(help = "graphics")
 ## Exercise
 ### 練習Formula
 *** =left
-- data: mtcras
+- data: cars
 
 ```
 ##    speed dist
@@ -305,7 +305,7 @@ library(help = "graphics")
 plot(y~x,data)
 
 *** .explanation
-- plot(dist~speed,mtcars)
+- plot(dist~speed,cars)
 - speed for x axis
 - dist for y axis
 - data: cars
@@ -359,7 +359,7 @@ plot(y~x,data)
 - Data: salary_cpi
 
 <!-- html table generated in R 2.15.3 by xtable 1.7-1 package -->
-<!-- Wed Aug 27 03:00:47 2014 -->
+<!-- Thu Aug 28 16:04:13 2014 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> year </TH> <TH> salary </TH> <TH> cpi </TH>  </TR>
   <TR> <TD align="right"> 1 </TD> <TD align="right">  69 </TD> <TD align="right"> 8843 </TD> <TD align="right"> 55.61 </TD> </TR>
@@ -445,7 +445,7 @@ plot(y~x,data)
 ```
 ## 
 ##     setosa versicolor  virginica 
-##         17         15         18
+##         13         20         17
 ```
 
 ![](figure/unnamed-chunk-15.png) 
@@ -464,7 +464,7 @@ plot(y~x,data)
 ## Simple Plots-Bar plot
 Data: VADeaths
 <!-- html table generated in R 2.15.3 by xtable 1.7-1 package -->
-<!-- Wed Aug 27 03:00:48 2014 -->
+<!-- Thu Aug 28 16:04:13 2014 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> Rural Male </TH> <TH> Rural Female </TH> <TH> Urban Male </TH> <TH> Urban Female </TH>  </TR>
   <TR> <TD align="right"> 50-54 </TD> <TD align="right"> 11.70 </TD> <TD align="right"> 8.70 </TD> <TD align="right"> 15.40 </TD> <TD align="right"> 8.40 </TD> </TR>
@@ -511,7 +511,7 @@ Data: VADeaths
 ```
 ## 
 ##     setosa versicolor  virginica 
-##         17         15         18
+##         13         20         17
 ```
 
 
