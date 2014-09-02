@@ -1,4 +1,4 @@
----
+﻿---
 title       : R Basic Visualization
 subtitle    : Easy Way to Plot
 author      : Ben
@@ -781,7 +781,7 @@ plot(x = df[, 2], y = df[, 1], cex = 0.1, asp = 1,frame.plot = FALSE,axes=FALSE,
 ## Example- Barnsley Fern Fractal
 ### 想要讓葉子顏色漸層
 ```{r,eval=FALSE}
-data('df_brower',package='DSC2014Tutorial')
+data('df_browser',package='DSC2014Tutorial')
 a=order(df[,2])
 ```
     plot(x = df[a, 2], y = df[a, 1], cex = 0.1, asp = 1,

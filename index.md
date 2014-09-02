@@ -1,4 +1,4 @@
----
+﻿---
 title       : R Basic Visualization
 subtitle    : Easy Way to Plot
 author      : Ben
@@ -845,7 +845,7 @@ text(0, -0.8, expression((3 * abs(x) + over(3, 4) * sqrt(over(abs((abs(x) -
 ### 想要讓葉子顏色漸層
 
 ```r
-data("df_brower", package = "DSC2014Tutorial")
+data("df_browser", package = "DSC2014Tutorial")
 a = order(df[, 2])
 ```
 
